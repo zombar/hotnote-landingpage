@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hotnote — local-first code &amp; markdown editor</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+    <link rel="apple-touch-icon" href="icon-512.png">
+
+    <!-- SEO -->
+    <meta name="description" content="Minimalist browser-based code and markdown editor with local filesystem access. No build step, no backend, no account — runs entirely in Chrome/Edge.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hotnote.io/">
+    <meta property="og:title" content="hotnote — local-first code &amp; markdown editor">
+    <meta property="og:description" content="Minimalist browser-based code and markdown editor with local filesystem access. No build step, no backend, no account.">
+    <meta property="og:image" content="https://hotnote.io/preview.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://hotnote.io/">
+    <meta name="twitter:title" content="hotnote — local-first code &amp; markdown editor">
+    <meta name="twitter:description" content="Minimalist browser-based code and markdown editor with local filesystem access.">
+    <meta name="twitter:image" content="https://hotnote.io/preview.jpg">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Theme-flash prevention: must run before stylesheet renders -->
+    <script>
+        (function() {
+            var stored = localStorage.getItem('hotnote-landing-theme');
+            var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+</head>
+<body>
+
+<!-- ── Site Header ─────────────────────────────────────────────────────── -->
+<header class="site-header">
+    <div class="container">
+        <a href="#" class="logo" aria-label="hotnote">hotnote</a>
+        <span class="header-tagline">local-first code &amp; markdown editor</span>
+        <div class="header-actions">
+            <button class="btn btn-icon" id="theme-toggle" aria-label="Toggle light/dark theme">
+                <!-- icon injected by JS -->
+            </button>
+            <a href="https://hotnote.io" class="btn btn-primary">Open App</a>
+        </div>
+    </div>
+</header>
+
+<!-- ── Hero ────────────────────────────────────────────────────────────── -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-grid">
+            <div class="hero-text">
+                <span class="logo hero-logo" aria-hidden="true">hotnote</span>
+                <h1 class="hero-heading">The editor that lives in your browser and works with your actual files.</h1>
+                <p class="hero-sub">Open any folder from your filesystem, edit code and markdown, preview in real-time — all without ever leaving the tab. No install. No account. No server.</p>
+                <div class="hero-ctas">
+                    <a href="https://hotnote.io" class="btn btn-primary btn-lg">Open App</a>
+                    <a href="https://github.com/hotnote/hotnote2" class="btn btn-lg" target="_blank" rel="noopener">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                        View on GitHub
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="browser-frame">
+                    <div class="browser-dots" aria-hidden="true">
+                        <span class="browser-dot"></span>
+                        <span class="browser-dot"></span>
+                        <span class="browser-dot"></span>
+                    </div>
+                    <div class="browser-url" aria-hidden="true">hotnote.io</div>
+                    <img src="preview.jpg" alt="hotnote editor screenshot showing code editing with sidebar and syntax highlighting" loading="eager">
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-cue" aria-hidden="true">
+            <span>scroll</span>
+            <svg class="scroll-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+    </div>
+</section>
+
+<!-- ── Features ────────────────────────────────────────────────────────── -->
+<section class="section features-section" id="features">
+    <div class="container">
+        <p class="section-label">Features</p>
+        <h2 class="section-title">Everything you need, and quite a lot more!</h2>
+        <p class="section-sub">Built for developers who want a lightweight editor without the ceremony of a native app or a cloud IDE.</p>
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+                <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                </svg>
+                <p class="feature-name">Local Filesystem Access</p>
+                <p class="feature-desc">Open entire folders directly from your disk using the File System Access API. Read, edit, and save files with no upload, no sync, no cloud.</p>
+            </div>
+
+            <div class="feature-card">
+                <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                    <polyline points="10 9 9 9 8 9"/>
+                </svg>
+                <p class="feature-name">Markdown Preview</p>
+                <p class="feature-desc">Full GFM rendering with tables, task lists, GitHub-style alerts, and fenced code blocks with syntax highlighting.</p>
+            </div>
+
+            <div class="feature-card">
+                <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="16 18 22 12 16 6"/>
+                    <polyline points="8 6 2 12 8 18"/>
+                </svg>
+                <p class="feature-name">Syntax Highlighting</p>
+                <p class="feature-desc">20+ languages including JavaScript, TypeScript, Python, Rust, Go, CSS, HTML, JSON, Markdown, and more.</p>
+            </div>
+
+            <div class="feature-card">
+                <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <line x1="3" y1="9" x2="21" y2="9"/>
+                    <line x1="3" y1="15" x2="21" y2="15"/>
+                    <line x1="9" y1="3" x2="9" y2="21"/>
+                    <line x1="15" y1="3" x2="15" y2="21"/>
+                </svg>
+                <p class="feature-name">JSON &amp; CSV Table View</p>
+                <p class="feature-desc">Automatically renders JSON arrays and CSV files as sortable, paginated data tables. Nested objects open in a modal.</p>
+            </div>
+
+            <div class="feature-card">
+                <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="8" y1="6" x2="21" y2="6"/>
+                    <line x1="8" y1="12" x2="21" y2="12"/>
+                    <line x1="8" y1="18" x2="21" y2="18"/>
+                    <line x1="3" y1="6" x2="3.01" y2="6"/>
+                    <line x1="3" y1="12" x2="3.01" y2="12"/>
+                    <line x1="3" y1="18" x2="3.01" y2="18"/>
+                </svg>
+                <p class="feature-name">JSON Tree View</p>
+                <p class="feature-desc">Explore deeply nested JSON structures with a collapsible tree — perfect for API responses and config files.</p>
+            </div>
+
+            <div class="feature-card">
+                <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                </svg>
+                <p class="feature-name">Image Viewer</p>
+                <p class="feature-desc">Inline image preview for PNG, JPG, GIF, SVG, and WebP — no separate app needed when browsing asset folders.</p>
+            </div>
+
+            <div class="feature-card">
+                <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <line x1="12" y1="3" x2="12" y2="21"/>
+                </svg>
+                <p class="feature-name">Split Pane Mode</p>
+                <p class="feature-desc">Open two files side by side with a draggable divider — great for editing markdown while reading reference code.</p>
+            </div>
+
+            <div class="feature-card">
+                <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                    <polyline points="17 21 17 13 7 13 7 21"/>
+                    <polyline points="7 3 7 8 15 8"/>
+                </svg>
+                <p class="feature-name">Autosave</p>
+                <p class="feature-desc">Enable autosave and changes are written back to disk 2 seconds after you stop typing. No Ctrl+S required.</p>
+            </div>
+
+            <div class="feature-card">
+                <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="1 4 1 10 7 10"/>
+                    <path d="M3.51 15a9 9 0 1 0 .49-3.36"/>
+                </svg>
+                <p class="feature-name">Session Restore</p>
+                <p class="feature-desc">Reopen the browser and hotnote offers to resume your last folder. Pick up exactly where you left off.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── Demo Viewer ──────────────────────────────────────────────────────── -->
+<section class="section demo-section" id="demo">
+    <div class="container">
+        <p class="section-label">Try it</p>
+        <h2 class="section-title">See it in action.</h2>
+        <p class="section-sub">Toggle between raw source and rendered markdown — exactly like the app.</p>
+
+        <div class="demo-editor" role="region" aria-label="Interactive editor demo">
+            <div class="demo-toolbar">
+                <button class="btn btn-sm active" id="tab-source" aria-pressed="true">Source</button>
+                <button class="btn btn-sm" id="tab-preview" aria-pressed="false">Preview</button>
+                <span class="demo-filename">README.md</span>
+            </div>
+            <div class="demo-body">
+                <div class="demo-gutter" aria-hidden="true"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</div>
+                <div class="demo-source active" id="demo-source">
+                    <pre class="demo-code"><code><span class="tok-keyword"># </span><span>hotnote</span>
+
+<span class="tok-comment">## What is this?</span>
+
+A <span class="tok-string">**minimalist**</span> browser-based editor that opens
+files directly from your filesystem.
+
+<span class="tok-comment">## Features</span>
+
+- <span class="tok-builtin">Local filesystem access</span> (no upload)
+- <span class="tok-keyword">Markdown</span> preview with GFM support
+- <span class="tok-number">20+</span> languages with syntax highlighting
+- Autosave, split pane, JSON tree view
+
+Works in <span class="tok-string">`Chrome`</span> and <span class="tok-string">`Edge`</span> only.</code></pre>
+                </div>
+                <div class="demo-preview" id="demo-preview">
+                    <h1>hotnote</h1>
+                    <h2>What is this?</h2>
+                    <p>A <strong>minimalist</strong> browser-based editor that opens files directly from your filesystem.</p>
+                    <h2>Features</h2>
+                    <ul>
+                        <li>Local filesystem access (no upload)</li>
+                        <li>Markdown preview with GFM support</li>
+                        <li>20+ languages with syntax highlighting</li>
+                        <li>Autosave, split pane, JSON tree view</li>
+                    </ul>
+                    <p>Works in <code>Chrome</code> and <code>Edge</code> only.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── JSON Tree View ──────────────────────────────────────────────────── -->
+<section class="section viewer-section" id="json-tree">
+    <div class="container">
+        <div class="viewer-split">
+            <div class="viewer-text">
+                <p class="section-label">JSON Tree View</p>
+                <h2 class="section-title">Navigate deeply nested JSON.</h2>
+                <p>Any <code>.json</code> file opens as a collapsible tree. Expand and collapse objects and arrays to explore structure at any depth without losing your place.</p>
+                <p>Arrays of objects get a one-click jump to the Table view, and nested objects inside a table cell open in a focused modal.</p>
+            </div>
+            <div class="viewer-demo">
+                <div class="demo-editor">
+                    <div class="demo-toolbar">
+                        <button class="btn btn-sm">Source</button>
+                        <button class="btn btn-sm active">Tree</button>
+                        <button class="btn btn-sm">Table</button>
+                        <span class="demo-filename">api-response.json</span>
+                    </div>
+                    <div class="tree-mock">
+                        <div class="t-line"><span class="t-toggle">▼</span><span class="t-bracket">{</span></div>
+                        <div class="t-indent">
+                            <div class="t-line"><span class="t-toggle">▼</span><span class="t-key">"users"</span><span class="t-colon">:</span><span class="t-bracket">[</span><span class="t-summary">4 items</span></div>
+                            <div class="t-indent">
+                                <div class="t-line"><span class="t-toggle">▼</span><span class="t-bracket">{</span></div>
+                                <div class="t-indent">
+                                    <div class="t-line"><span class="t-toggle"> </span><span class="t-key">"id"</span><span class="t-colon">:</span><span class="t-num">1</span><span class="t-comma">,</span></div>
+                                    <div class="t-line"><span class="t-toggle"> </span><span class="t-key">"name"</span><span class="t-colon">:</span><span class="t-str">"Alice"</span><span class="t-comma">,</span></div>
+                                    <div class="t-line"><span class="t-toggle"> </span><span class="t-key">"role"</span><span class="t-colon">:</span><span class="t-str">"admin"</span><span class="t-comma">,</span></div>
+                                    <div class="t-line"><span class="t-toggle"> </span><span class="t-key">"active"</span><span class="t-colon">:</span><span class="t-bool">true</span></div>
+                                </div>
+                                <div class="t-line"><span class="t-bracket">}</span><span class="t-comma">,</span></div>
+                                <div class="t-line"><span class="t-toggle">▶</span><span class="t-bracket">{</span><span class="t-summary">4 keys</span><span class="t-bracket"> }</span></div>
+                                <div class="t-line"><span class="t-toggle">▶</span><span class="t-bracket">{</span><span class="t-summary">4 keys</span><span class="t-bracket"> }</span></div>
+                                <div class="t-line"><span class="t-toggle">▶</span><span class="t-bracket">{</span><span class="t-summary">4 keys</span><span class="t-bracket"> }</span></div>
+                            </div>
+                            <div class="t-line"><span class="t-bracket">]</span><span class="t-comma">,</span></div>
+                            <div class="t-line"><span class="t-toggle">▼</span><span class="t-key">"meta"</span><span class="t-colon">:</span><span class="t-bracket">{</span></div>
+                            <div class="t-indent">
+                                <div class="t-line"><span class="t-toggle"> </span><span class="t-key">"total"</span><span class="t-colon">:</span><span class="t-num">284</span><span class="t-comma">,</span></div>
+                                <div class="t-line"><span class="t-toggle"> </span><span class="t-key">"page"</span><span class="t-colon">:</span><span class="t-num">1</span><span class="t-comma">,</span></div>
+                                <div class="t-line"><span class="t-toggle"> </span><span class="t-key">"per_page"</span><span class="t-colon">:</span><span class="t-num">25</span></div>
+                            </div>
+                            <div class="t-line"><span class="t-bracket">}</span></div>
+                        </div>
+                        <div class="t-line"><span class="t-bracket">}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── CSV / JSON Table View ────────────────────────────────────────────── -->
+<section class="section" id="datasheet">
+    <div class="container">
+        <div class="viewer-split viewer-split-reverse">
+            <div class="viewer-text">
+                <p class="section-label">CSV &amp; JSON Table View</p>
+                <h2 class="section-title">Spreadsheet view, zero configuration.</h2>
+                <p>CSV files open as a sortable, paginated table automatically. JSON arrays of objects get the same treatment — including type-aware rendering for numbers, booleans, and nulls.</p>
+                <p>Nested objects and arrays inside a cell are shown as a badge you can click to drill into, rather than a wall of escaped text.</p>
+            </div>
+            <div class="viewer-demo">
+                <div class="demo-editor">
+                    <div class="demo-toolbar">
+                        <button class="btn btn-sm">Source</button>
+                        <button class="btn btn-sm active">Table</button>
+                        <span class="demo-filename">users.csv</span>
+                    </div>
+                    <div class="datasheet-mock">
+                        <div class="datasheet-toolbar">
+                            <span>284 rows · 6 columns</span>
+                            <span>Showing 1–5</span>
+                        </div>
+                        <div class="datasheet-scroll">
+                            <table class="datasheet-table">
+                                <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>name</th>
+                                        <th>email</th>
+                                        <th>role</th>
+                                        <th>score</th>
+                                        <th>active</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="ds-num">1</td><td>Alice</td><td>alice@acme.com</td><td>admin</td><td class="ds-num">98</td><td class="ds-true">true</td></tr>
+                                    <tr><td class="ds-num">2</td><td>Bob</td><td>bob@acme.com</td><td>editor</td><td class="ds-num">74</td><td class="ds-false">false</td></tr>
+                                    <tr><td class="ds-num">3</td><td>Carol</td><td>carol@acme.com</td><td>viewer</td><td class="ds-num">88</td><td class="ds-true">true</td></tr>
+                                    <tr><td class="ds-num">4</td><td>Dave</td><td>dave@acme.com</td><td>admin</td><td class="ds-num">91</td><td class="ds-true">true</td></tr>
+                                    <tr><td class="ds-num">5</td><td>Eve</td><td>eve@acme.com</td><td>editor</td><td class="ds-num">67</td><td class="ds-false">false</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="datasheet-pagination">
+                            <button class="btn btn-sm" disabled>← Prev</button>
+                            <span>Page 1 of 57</span>
+                            <button class="btn btn-sm">Next →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── CVD Accessibility ────────────────────────────────────────────────── -->
+<section class="cvd-section" id="accessibility">
+    <div class="container">
+        <div class="cvd-intro">
+            <p class="section-label">Accessibility</p>
+            <h2 class="section-title">Designed for everyone.<br>Including the 300 million.</h2>
+            <p>Approximately 300 million people worldwide have some form of color vision deficiency (CVD). Most software fails them by encoding critical information in color alone — red for errors, green for success, colored tabs for state.</p>
+            <p>Hotnote takes a deliberate greyscale approach to its UI chrome. Active states use <strong>border insets and contrast</strong>, not color. Information is never conveyed by hue alone. The logo gradient is the single exception — it is branding, not information.</p>
+            <p>Syntax colors are supplementary. They add richness for those who see them, but the editor remains fully functional without them.</p>
+        </div>
+
+        <div class="cvd-demo-wrap">
+            <div class="cvd-demo-header">
+                <span>Simulate color vision deficiency on the "typical editor" column:</span>
+                <button class="btn btn-sm cvd-btn active" data-filter="normal">Normal</button>
+                <button class="btn btn-sm cvd-btn" data-filter="deuteranopia">Deuteranopia</button>
+                <button class="btn btn-sm cvd-btn" data-filter="protanopia">Protanopia</button>
+            </div>
+            <div class="cvd-columns">
+                <!-- Left: typical colorful syntax theme (filter applied here) -->
+                <div class="cvd-col cvd-left-strip">
+                    <p class="cvd-col-label">Typical editor (VS Code Dark+)</p>
+                    <div class="cvd-code-wrap">
+                        <div class="cvd-gutter" aria-hidden="true"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7</div>
+                        <pre class="cvd-code cvd-typical"><code><span class="typ-kw">function</span> <span class="typ-fn">fetchData</span>(<span class="typ-param">url</span>) {
+    <span class="typ-comment">// fetch from remote API</span>
+    <span class="typ-kw">const</span> <span class="typ-var">res</span> = <span class="typ-kw">await</span> fetch(<span class="typ-var">url</span>);
+    <span class="typ-kw">const</span> <span class="typ-var">count</span> = res.status;
+    <span class="typ-kw">return</span> count <span class="typ-op">===</span> <span class="typ-num">200</span>;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Right: hotnote syntax theme (no filter ever) -->
+                <div class="cvd-col">
+                    <p class="cvd-col-label">hotnote</p>
+                    <div class="cvd-code-wrap">
+                        <div class="cvd-gutter" aria-hidden="true"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7</div>
+                        <pre class="cvd-code cvd-hotnote"><code><span class="tok-keyword">function</span> fetchData(<span class="tok-builtin">url</span>) {
+    <span class="tok-comment">// fetch from remote API</span>
+    <span class="tok-keyword">const</span> res = <span class="tok-keyword">await</span> fetch(url);
+    <span class="tok-keyword">const</span> count = res.status;
+    <span class="tok-keyword">return</span> count <span class="tok-operator">===</span> <span class="tok-number">200</span>;
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p style="margin-top:1.25rem; font-size:0.875rem; color:var(--color-text-tertiary);">
+            Under Deuteranopia or Protanopia simulation, the green comment and orange/yellow identifiers in the left column shift toward indistinguishable brownish tones. The hotnote column is unchanged — and even if its syntax colors blurred, the code structure remains legible because color is never the only signal.
+        </p>
+    </div>
+</section>
+
+<!-- ── Philosophy ──────────────────────────────────────────────────────── -->
+<section class="section philosophy-section" id="philosophy">
+    <div class="container">
+        <div class="philosophy-grid">
+            <div class="philosophy-text">
+                <p class="section-label">Philosophy</p>
+                <h2 class="section-title">We love lean software.</h2>
+                <p>There is something deeply satisfying about a tool that does exactly what it says, loads in under a second, and never asks you to create an account.</p>
+                <p>Hotnote was inspired by the spirit of MS-DOS Edit and Windows 3.11-era utilities — small, fast, focused. The entire app is plain HTML, CSS, and JavaScript. No bundler. No framework. No node_modules in production. The source code is readable by any developer in any text editor.</p>
+                <p>When something breaks, you can open DevTools and debug it. When you want to understand it, you can just read it. That is a feature.</p>
+            </div>
+
+            <div>
+                <p class="section-label" style="margin-bottom:1rem;">Tech stack</p>
+                <div class="tech-badges">
+                    <div class="tech-badge">Pure HTML / CSS / JS</div>
+                    <div class="tech-badge">No build step</div>
+                    <div class="tech-badge">No frameworks</div>
+                    <div class="tech-badge">No backend</div>
+                    <div class="tech-badge">No account required</div>
+                    <div class="tech-badge">PWA / Offline capable</div>
+                    <div class="tech-badge">Zero external requests at runtime</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Browser Requirements ─────────────────────────────────────────────── -->
+<section class="browser-req" id="compatibility">
+    <div class="container">
+        <p class="section-label">Browser compatibility</p>
+        <h2 class="section-title">Honest about limitations.</h2>
+        <p class="section-sub">The File System Access API is powerful but not universally supported yet.</p>
+
+        <div class="req-box">
+            <div class="req-grid">
+                <div class="req-item">
+                    <span class="req-mark yes">✓</span>
+                    <div>
+                        <p class="req-name">Chrome 86+</p>
+                        <p class="req-note">Full support, recommended</p>
+                    </div>
+                </div>
+                <div class="req-item">
+                    <span class="req-mark yes">✓</span>
+                    <div>
+                        <p class="req-name">Edge 86+</p>
+                        <p class="req-note">Full support</p>
+                    </div>
+                </div>
+                <div class="req-item">
+                    <span class="req-mark no">✗</span>
+                    <div>
+                        <p class="req-name">Firefox</p>
+                        <p class="req-note">No File System Access API</p>
+                    </div>
+                </div>
+                <div class="req-item">
+                    <span class="req-mark no">✗</span>
+                    <div>
+                        <p class="req-name">Safari / Mobile</p>
+                        <p class="req-note">Partial / no support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Bottom CTA ───────────────────────────────────────────────────────── -->
+<section class="bottom-cta">
+    <div class="container">
+        <span class="logo" aria-hidden="true">hotnote</span>
+        <h2>Your files are waiting.</h2>
+        <p>Open a folder. Start editing. Close the tab when you're done. That's it.</p>
+        <a href="https://hotnote.io" class="btn btn-primary btn-lg">Open App →</a>
+    </div>
+</section>
+
+<!-- ── Footer ───────────────────────────────────────────────────────────── -->
+<footer class="site-footer">
+    <div class="container">
+        hotnote.io &nbsp;·&nbsp; MIT License &nbsp;·&nbsp; No tracking &nbsp;·&nbsp; No account &nbsp;·&nbsp; Made with zero dependencies.
+    </div>
+</footer>
+
+<!-- SVG filter definitions for CVD simulation -->
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+    <defs>
+        <filter id="deuteranopia" color-interpolation-filters="linearRGB">
+            <feColorMatrix type="matrix" values="
+                0.625 0.375 0     0 0
+                0.700 0.300 0     0 0
+                0     0.300 0.700 0 0
+                0     0     0     1 0"/>
+        </filter>
+        <filter id="protanopia" color-interpolation-filters="linearRGB">
+            <feColorMatrix type="matrix" values="
+                0.567 0.433 0     0 0
+                0.558 0.442 0     0 0
+                0     0.242 0.758 0 0
+                0     0     0     1 0"/>
+        </filter>
+    </defs>
+</svg>
+
+<script src="js/main.js"></script>
+</body>
+</html>
