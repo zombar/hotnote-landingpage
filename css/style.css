@@ -997,6 +997,11 @@ html[data-theme="light"] .logo {
     color: var(--color-text-tertiary);
 }
 
+.site-footer a {
+    color: inherit;
+    text-decoration: underline;
+}
+
 /* =====================================================================
    Viewer Sections (JSON Tree & Datasheet)
    ===================================================================== */
