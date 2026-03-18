@@ -354,7 +354,7 @@ html[data-theme="light"] .logo {
     font-size: 4rem;
     letter-spacing: 0.05rem;
     margin-bottom: 1.25rem;
-    display: block;
+    display: inline-block;
 }
 
 .hero-heading {
