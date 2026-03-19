@@ -1150,6 +1150,189 @@ html[data-theme="light"] .logo {
 }
 
 /* =====================================================================
+   Diff View Mockup — mirrors hotnote's actual diff renderer exactly
+   ===================================================================== */
+.diff-mock {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.5;
+    background: var(--color-bg-primary);
+    overflow-x: auto;
+}
+
+.diff-line {
+    display: flex;
+    align-items: baseline;
+    border-left: 2px solid transparent;
+    padding: 0 0.75rem;
+}
+
+.diff-ln {
+    width: 3ch;
+    flex-shrink: 0;
+    user-select: none;
+    color: var(--color-text-tertiary);
+    text-align: right;
+    padding-right: 0.5rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.diff-ln-new { padding-right: 0.75rem; }
+
+.diff-gutter {
+    width: 1rem;
+    flex-shrink: 0;
+    user-select: none;
+    color: var(--color-text-tertiary);
+    text-align: center;
+}
+
+.diff-line code {
+    font-family: inherit;
+    font-size: inherit;
+    white-space: pre-wrap;
+    word-break: break-word;
+    flex: 1;
+    min-width: 0;
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--color-text-primary);
+}
+
+/* Added lines: bg-tertiary tint + solid left border + bold gutter symbol */
+.diff-add {
+    background: var(--color-bg-tertiary);
+    border-left-color: var(--color-text-secondary);
+    border-left-style: solid;
+}
+
+.diff-add .diff-gutter { color: var(--color-text-primary); font-weight: 700; }
+
+/* Removed lines: subtler bg + dashed left border + strikethrough text */
+.diff-del {
+    background: var(--color-bg-secondary);
+    border-left-color: var(--color-text-tertiary);
+    border-left-style: dashed;
+}
+
+html[data-theme="light"] .diff-del { background: rgba(0, 0, 0, 0.04); }
+
+.diff-del code {
+    text-decoration: line-through;
+    color: var(--color-text-secondary);
+}
+
+/* Hunk header */
+.diff-hunk {
+    padding: 0.2rem 0.75rem;
+    color: var(--color-text-tertiary);
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    background: var(--color-bg-toolbar);
+    border-top: 1px solid var(--color-border-primary);
+    border-bottom: 1px solid var(--color-border-primary);
+}
+
+.diff-mock .tok-keyword { color: var(--tok-keyword); font-weight: 600; }
+.diff-mock .tok-string  { color: var(--tok-string); }
+.diff-mock .tok-comment { color: var(--tok-comment); font-style: italic; }
+.diff-mock .tok-number  { color: var(--tok-number); }
+.diff-mock .tok-builtin { color: var(--tok-builtin); }
+
+/* =====================================================================
+   Split Pane Mockup
+   ===================================================================== */
+.split-mockup {
+    display: flex;
+    overflow: hidden;
+    border: 1px solid var(--color-border-primary);
+    border-radius: 4px;
+    box-shadow: var(--shadow-lg);
+}
+
+.split-mockup .demo-editor {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+    max-width: none;
+}
+
+.split-handle {
+    width: 4px;
+    background: var(--color-border-primary);
+    flex-shrink: 0;
+    cursor: col-resize;
+}
+
+.split-md-preview {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    background: var(--color-bg-primary);
+    overflow: auto;
+    min-height: 160px;
+}
+
+.split-md-preview h1 {
+    font-size: 1em;
+    font-weight: 700;
+    color: var(--tok-keyword);
+    margin-bottom: 0.25em;
+    border-bottom: 1px solid var(--color-border-primary);
+    padding-bottom: 0.15em;
+}
+
+.split-md-preview h2 {
+    font-size: 0.875em;
+    font-weight: 600;
+    color: var(--tok-keyword);
+    margin: 0.5em 0 0.2em;
+}
+
+.split-md-preview p  { color: var(--color-text-secondary); margin: 0.3em 0; }
+.split-md-preview ul { padding-left: 1.25em; color: var(--color-text-secondary); margin: 0.25em 0; }
+.split-md-preview li { margin: 0.15em 0; }
+
+@media (max-width: 500px) {
+    .split-mockup { flex-direction: column; }
+    .split-handle { width: 100%; height: 4px; cursor: row-resize; }
+}
+
+/* =====================================================================
+   Viewer section — bullet lists
+   ===================================================================== */
+.viewer-text ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0.875rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.viewer-text ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    color: var(--color-text-secondary);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+}
+
+.viewer-text ul li::before {
+    content: '▸';
+    color: var(--color-text-primary);
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    margin-top: 0.3em;
+}
+
+/* =====================================================================
    Animations
    ===================================================================== */
 @keyframes fadeInUp {
