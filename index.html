@@ -392,14 +392,12 @@ Works in <span class="tok-string">`Chrome`</span> and <span class="tok-string">`
                         <span class="demo-filename">greet.js</span>
                     </div>
                     <div class="diff-mock">
-                        <div class="diff-line diff-hunk"><span class="diff-gutter">@@</span><span class="diff-content">@@ -12,7 +12,8 @@ module.exports = { greet };</span></div>
-                        <div class="diff-line diff-ctx"><span class="diff-gutter"> </span><span class="diff-content"> </span></div>
-                        <div class="diff-line diff-ctx"><span class="diff-gutter"> </span><span class="diff-content">  <span class="tok-keyword">function</span> greet(name) {</span></div>
-                        <div class="diff-line diff-del"><span class="diff-gutter">-</span><span class="diff-content">    <span class="tok-keyword">return</span> <span class="tok-string">"Hello " + name;</span></span></div>
-                        <div class="diff-line diff-add"><span class="diff-gutter">+</span><span class="diff-content">    <span class="tok-keyword">const</span> msg = <span class="tok-string">`Hello, ${name}!`</span>;</span></div>
-                        <div class="diff-line diff-add"><span class="diff-gutter">+</span><span class="diff-content">    <span class="tok-keyword">return</span> msg;</span></div>
-                        <div class="diff-line diff-ctx"><span class="diff-gutter"> </span><span class="diff-content">  }</span></div>
-                        <div class="diff-line diff-ctx"><span class="diff-gutter"> </span><span class="diff-content"> </span></div>
+                        <div class="diff-hunk">@@ -12,7 +12,8 @@ module.exports = { greet };</div>
+                        <div class="diff-line"><span class="diff-ln diff-ln-old">12</span><span class="diff-ln diff-ln-new">12</span><span class="diff-gutter">&nbsp;</span><code>  <span class="tok-keyword">function</span> greet(name) {</code></div>
+                        <div class="diff-line diff-del"><span class="diff-ln diff-ln-old">13</span><span class="diff-ln diff-ln-new"></span><span class="diff-gutter">-</span><code>    return "Hello " + name;</code></div>
+                        <div class="diff-line diff-add"><span class="diff-ln diff-ln-old"></span><span class="diff-ln diff-ln-new">13</span><span class="diff-gutter">+</span><code>    <span class="tok-keyword">const</span> msg = <span class="tok-string">`Hello, ${name}!`</span>;</code></div>
+                        <div class="diff-line diff-add"><span class="diff-ln diff-ln-old"></span><span class="diff-ln diff-ln-new">14</span><span class="diff-gutter">+</span><code>    <span class="tok-keyword">return</span> msg;</code></div>
+                        <div class="diff-line"><span class="diff-ln diff-ln-old">14</span><span class="diff-ln diff-ln-new">15</span><span class="diff-gutter">&nbsp;</span><code>  }</code></div>
                     </div>
                 </div>
             </div>
