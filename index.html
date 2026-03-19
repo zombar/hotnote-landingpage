@@ -171,7 +171,7 @@
                     <line x1="12" y1="3" x2="12" y2="21"/>
                 </svg>
                 <p class="feature-name">Split Pane Mode</p>
-                <p class="feature-desc">Open two files side by side with a draggable divider — great for editing markdown while reading reference code.</p>
+                <p class="feature-desc">Open two files side by side with a draggable divider. Markdown files auto-open as source + live preview. Each pane keeps independent mode, history, and autosave.</p>
             </div>
 
             <div class="feature-card">
@@ -193,6 +193,17 @@
                 <p class="feature-desc">Reopen the browser and hotnote offers to resume your last folder. Pick up exactly where you left off.</p>
             </div>
 
+            <div class="feature-card">
+                <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="6" y1="3" x2="6" y2="15"/>
+                    <circle cx="18" cy="6" r="3"/>
+                    <circle cx="6" cy="18" r="3"/>
+                    <path d="M18 9a9 9 0 0 1-9 9"/>
+                </svg>
+                <p class="feature-name">Git Diff View</p>
+                <p class="feature-desc">See what changed since HEAD — inline diffs with +/- gutter, sidebar indicators, and a changes-only filter. Reads <code>.git/</code> directly. Zero backend required.</p>
+            </div>
+
         </div>
     </div>
 </section>
@@ -202,7 +213,7 @@
     <div class="container">
         <p class="section-label">Try it</p>
         <h2 class="section-title">See it in action.</h2>
-        <p class="section-sub">Toggle between raw source and rendered markdown — exactly like the app.</p>
+        <p class="section-sub">Toggle between raw source and rendered markdown. The app also supports inline git diffs and a changes-only file filter.</p>
 
         <div class="demo-editor" role="region" aria-label="Interactive editor demo">
             <div class="demo-toolbar">
@@ -359,6 +370,99 @@ Works in <span class="tok-string">`Chrome`</span> and <span class="tok-string">`
                             <button class="btn btn-sm" disabled>← Prev</button>
                             <span>Page 1 of 57</span>
                             <button class="btn btn-sm">Next →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Git Diff View ────────────────────────────────────────────────────── -->
+<section class="section viewer-section" id="git-diff">
+    <div class="container">
+        <div class="viewer-split">
+            <div class="viewer-text">
+                <p class="section-label">Git Diff View</p>
+                <h2 class="section-title">Git diffs. No terminal, no extensions.</h2>
+                <p>HotNote reads your <code>.git/</code> folder directly — packed objects and all. No backend. No shell.</p>
+                <ul>
+                    <li>Orange dots in the sidebar mark modified files and folders</li>
+                    <li>Unified diff with <code>+/-</code> gutter and syntax-highlighted additions</li>
+                    <li>Filter the file tree to show only changed files</li>
+                    <li>Works with both loose and packed git objects</li>
+                    <li>CVD-safe: glyphs + borders, not just color</li>
+                </ul>
+            </div>
+            <div class="viewer-demo">
+                <div class="demo-editor">
+                    <div class="demo-toolbar">
+                        <button class="btn btn-sm">Source</button>
+                        <button class="btn btn-sm active">Diff</button>
+                        <span class="demo-filename">greet.js</span>
+                    </div>
+                    <div class="diff-mock">
+                        <div class="diff-line diff-hunk"><span class="diff-gutter">@@</span><span class="diff-content">@@ -12,7 +12,8 @@ module.exports = { greet };</span></div>
+                        <div class="diff-line diff-ctx"><span class="diff-gutter"> </span><span class="diff-content"> </span></div>
+                        <div class="diff-line diff-ctx"><span class="diff-gutter"> </span><span class="diff-content">  <span class="tok-keyword">function</span> greet(name) {</span></div>
+                        <div class="diff-line diff-del"><span class="diff-gutter">-</span><span class="diff-content">    <span class="tok-keyword">return</span> <span class="tok-string">"Hello " + name;</span></span></div>
+                        <div class="diff-line diff-add"><span class="diff-gutter">+</span><span class="diff-content">    <span class="tok-keyword">const</span> msg = <span class="tok-string">`Hello, ${name}!`</span>;</span></div>
+                        <div class="diff-line diff-add"><span class="diff-gutter">+</span><span class="diff-content">    <span class="tok-keyword">return</span> msg;</span></div>
+                        <div class="diff-line diff-ctx"><span class="diff-gutter"> </span><span class="diff-content">  }</span></div>
+                        <div class="diff-line diff-ctx"><span class="diff-gutter"> </span><span class="diff-content"> </span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Split Pane ───────────────────────────────────────────────────────── -->
+<section class="section" id="split-pane">
+    <div class="container">
+        <div class="viewer-split viewer-split-reverse">
+            <div class="viewer-text">
+                <p class="section-label">Split Pane</p>
+                <h2 class="section-title">Two panes. One focus.</h2>
+                <p>Open any two files side by side with a draggable divider.</p>
+                <ul>
+                    <li>Markdown files open as source + live preview automatically</li>
+                    <li>Each pane has independent mode, history, and autosave</li>
+                    <li>Sync edits when both panes show the same file</li>
+                    <li>Drag the divider to resize</li>
+                </ul>
+            </div>
+            <div class="viewer-demo">
+                <div class="split-mockup">
+                    <div class="demo-editor">
+                        <div class="demo-toolbar">
+                            <button class="btn btn-sm active">Source</button>
+                            <span class="demo-filename">README.md</span>
+                        </div>
+                        <pre class="demo-code" style="min-height:160px;padding:0.75rem;margin:0;font-size:0.75rem;line-height:1.5;background:var(--color-bg-primary)"><code><span class="tok-keyword"># </span>hotnote
+
+<span class="tok-comment">## Features</span>
+
+- <span class="tok-builtin">Local files</span>
+- <span class="tok-keyword">Markdown</span> preview
+- Split pane mode
+- <span class="tok-number">20+</span> languages</code></pre>
+                    </div>
+                    <div class="split-handle" aria-hidden="true"></div>
+                    <div class="demo-editor">
+                        <div class="demo-toolbar">
+                            <button class="btn btn-sm active">Preview</button>
+                            <span class="demo-filename">README.md</span>
+                        </div>
+                        <div class="split-md-preview">
+                            <h1>hotnote</h1>
+                            <h2>Features</h2>
+                            <ul>
+                                <li>Local files</li>
+                                <li>Markdown preview</li>
+                                <li>Split pane mode</li>
+                                <li>20+ languages</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
